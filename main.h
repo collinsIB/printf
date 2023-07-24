@@ -7,6 +7,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * function prototype
@@ -22,5 +23,6 @@ void printf_strings(va_list args, int *count);
 void print_percent(int *count);
 int _printf(const char *format, ...);
 int main(void);
+int ce_main(void);
 
 #endif
