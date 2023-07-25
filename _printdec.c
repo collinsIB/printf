@@ -3,14 +3,14 @@
 #include "main.h"
 
 /**
- * _fineprint - function that produces output
+ * _printf - function that produces output
  * and handling format specifier d and i
  * @format: character to print
  *
  * Return: 0
  */
 
-int _fineprint(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	int i;
 	va_list args;
@@ -48,12 +48,12 @@ int _fineprint(const char *format, ...)
 }
 
 /**
- * _print_main - main function
+ * main - main function
  *
  * Return: 0
  */
 
-int _print_main(void)
+int main(void)
 {
 	_printf("the number is: %d\n", 42);
 	return (0);
