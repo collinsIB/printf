@@ -3,14 +3,14 @@
 #include "main.h"
 
 /**
- * _printf - function that produces output
+ * _format_specifier - function that produces output
  * and handling format specifier d and i
  * @format: character to print
  *
  * Return: 0
  */
 
-int _printf(const char *format, ...)
+int _format_specifier(const char *format, ...)
 {
 	int i;
 	va_list args;
@@ -48,7 +48,7 @@ int _printf(const char *format, ...)
 }
 
 /**
- * main - main function
+ * _print_main - main function
  *
  * Return: 0
  */
