@@ -25,5 +25,9 @@ int _printf(const char *format, ...);
 int main(void);
 int ce_main(void);
 int _print_main(void);
+<<<<<<< HEAD
+=======
+int _format_specifier(const char *format, ...);
+>>>>>>> 6bcdc8fb364a9e57d42e0fac846c3354a3145bbf
 
 #endif
