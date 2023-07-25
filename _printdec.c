@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
  * Return: 0
  */
 
-int main(void)
+int _print_main(void)
 {
 	_printf("the number is: %d\n", 42);
 	return (0);
