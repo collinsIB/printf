@@ -30,11 +30,16 @@ int _format_specifier(const char *format, ...)
 					{
 						int num = va_arg(args, int);
 
-						count += printf("%d", num);
+						count += printInteger(num);
 						break;
 					}
 				default:
-					break;
+					{
+						_putchar('%');
+						_putchar(format[i]);
+						count += 2;
+						break;
+					}
 			}
 		}
 		else
@@ -48,13 +53,44 @@ int _format_specifier(const char *format, ...)
 }
 
 /**
- * _print_main - main function
+ * printInteger - main function
+ * @num: integer
  *
  * Return: 0
  */
 
-int _print_main(void)
+int printInteger(int num)
 {
-	_printf("the number is: %d\n", 42);
-	return (0);
+	int count = 0;
+
+	if (num < 0)
+	{
+		_putchar('-');
+		count++;
+
+		num = -num;
+	}
+
+	if (num == 0)
+	{
+		_putchar('0');
+		return (count + 1);
+	}
+
+	int divisor = 1;
+
+	while (num / divisor > 9)
+		divisor *= 10;
+
+	while (divisor > 0)
+	{
+		int digit = num / divisor;
+
+		_putchar(digit + '0');
+		count++;
+		num %= divisor;
+		divisor /= 10;
+	}
+
+	return (count);
 }
