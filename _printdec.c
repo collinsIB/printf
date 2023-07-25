@@ -62,6 +62,7 @@ int _format_specifier(const char *format, ...)
 int printInteger(int num)
 {
 	int count = 0;
+	int divisor = 1;
 
 	if (num < 0)
 	{
@@ -76,8 +77,6 @@ int printInteger(int num)
 		_putchar('0');
 		return (count + 1);
 	}
-
-	int divisor = 1;
 
 	while (num / divisor > 9)
 		divisor *= 10;
