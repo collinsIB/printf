@@ -24,5 +24,7 @@ void print_percent(int *count);
 int _printf(const char *format, ...);
 int main(void);
 int ce_main(void);
+int _print_main(void);
+int _fineprint(const char *format, ...);
 
 #endif
