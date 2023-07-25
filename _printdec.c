@@ -29,7 +29,7 @@ int _fineprint(const char *format, ...)
 				case 'i':
 					{
 						int num = va_arg(args, int);
-						
+
 						count += printf("%d", num);
 						break;
 					}
