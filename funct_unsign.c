@@ -25,11 +25,13 @@ int _printf(const char *format, ...)
 
 	int count = 0;
 
+	int i;
+
 	va_list args;
 
 	va_start(args, format);
 
-	for (int i = 0; format[i] != '\0'; i++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
@@ -38,11 +40,14 @@ int _printf(const char *format, ...)
 			{
 				case 'b':
 					{
-						unsigned int num = va_args(args, unsigned int);
+						unsigned int num = va_arg(args, unsigned int);
 
 						print_binary(num);
 						break;
 					}
+				default:
+					break;
+			}
 			}
 			else
 			{
@@ -53,7 +58,6 @@ int _printf(const char *format, ...)
 
 		va_end(args);
 		return (count);
-	}
 }
 /**
  * main - main function
@@ -64,5 +68,3 @@ int main(void)
 	_printf("The number in binary is: %b\n", 42);
 	return (0);
 }
-
-

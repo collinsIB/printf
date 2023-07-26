@@ -25,5 +25,6 @@ int _printf(const char *format, ...);
 int main(void);
 int ce_main(void);
 int _print_main(void);
+void print_binary(unsigned int n);
 
 #endif
