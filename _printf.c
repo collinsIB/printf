@@ -1,113 +1,67 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdlib.h>
+
+void print_buffer(char buffer[], int *buff_ind);
 
 /**
- * print_char - print character
- * @args: Argument
- * @count: count integers
- *
- * Return: 0
- */
-
-void print_char(va_list args, int *count)
-{
-	char c = va_arg(args, int);
-
-	_putchar(c);
-	(*count)++;
-}
-/**
- * printf_string - print the string
- * @args: argument string
- * @count: integars to print
- *
- * Return: 0
- */
-
-void printf_string(va_list args, int *count)
-{
-	const char *s = va_arg(args, const char*);
-
-	while (*s)
-	{
-		_putchar(*s);
-		s++;
-		(*count)++;
-	}
-}
-/**
- * print_percent - print the percentage
- * @count: percentage count
- *
- * Return: 0
- */
-
-void print_percent(int *count)
-{
-	_putchar('%');
-	(*count)++;
-}
-/**
- * _printf - function that produces output according to a format
- * @format: is a character string
- *
- * Return: 0
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
+	int i, printed = 0, printed_chars = 0;
+	int flags, width, precision, size, buff_ind = 0;
+	va_list list;
+	char buffer[BUFF_SIZE];
 
-	int count = 0;
+	if (format == NULL)
+		return (-1);
 
-	va_start(args, format);
+	va_start(list, format);
 
-	while (*format)
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		if (*format == '%')
+		if (format[i] != '%')
 		{
-			format++;
-			switch (*format)
-			{
-				case 'c':
-					print_char(args, &count);
-					break;
-				case 's':
-					printf_string(args, &count);
-					break;
-				case '%':
-					print_percent(&count);
-					break;
-				default:
-					_putchar('%');
-					_putchar(*format);
-					count += 2;
-			}
+			buffer[buff_ind++] = format[i];
+			if (buff_ind == BUFF_SIZE)
+				print_buffer(buffer, &buff_ind);
+			/* write(1, &format[i], 1);*/
+			printed_chars++;
 		}
 		else
 		{
-			_putchar(*format);
-			count++;
+			print_buffer(buffer, &buff_ind);
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
+			size = get_size(format, &i);
+			++i;
+			printed = handle_print(format, &i, list, buffer,
+				flags, width, precision, size);
+			if (printed == -1)
+				return (-1);
+			printed_chars += printed;
 		}
-		format++;
 	}
-	va_end(args);
-	return (count);
+
+	print_buffer(buffer, &buff_ind);
+
+	va_end(list);
+
+	return (printed_chars);
 }
+
 /**
- * ce_main - function main
- *
- * Return: 0
+ * print_buffer - Prints the content
+ * @buffer: Array of characters
+ * @buff_ind: Index of the buffer
  */
-
-int ce_main(void)
+void print_buffer(char buffer[], int *buff_ind)
 {
-	char c = 'B';
-	const char *s = "Hello, Team collins and ezekiel!";
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
 
-	int num_chars = _printf("Character: %c, String: %s, Percentage: %%\n", c, s);
-
-	printf("\nNumber of characters printed: %d\n", num_chars);
-	return (0);
+	*buff_ind = 0;
 }
 
