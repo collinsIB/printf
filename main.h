@@ -4,9 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-/**
- * function prototype
- */
+/********** FUNCTIONS *********/
 
 int _putchar(char o);
 int _print_str(char *s);

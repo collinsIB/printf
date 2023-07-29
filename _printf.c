@@ -12,10 +12,10 @@
 
 void print_char(va_list args, int *count)
 {
-        char c = va_arg(args, int);
+	char c = va_arg(args, int);
 
-        _putchar(c);
-        (*count)++;
+	_putchar(c);
+	(*count)++;
 }
 /**
  * printf_string - print the string
@@ -27,14 +27,14 @@ void print_char(va_list args, int *count)
 
 void printf_string(va_list args, int *count)
 {
-        const char *s = va_arg(args, const char*);
+	const char *s = va_arg(args, const char*);
 
-        while (*s)
-        {
-                _putchar(*s);
-                s++;
-                (*count)++;
-        }
+	while (*s)
+	{
+		_putchar(*s);
+		s++;
+		(*count)++;
+	}
 }
 /**
  * print_percent - print the percentage
@@ -45,8 +45,8 @@ void printf_string(va_list args, int *count)
 
 void print_percent(int *count)
 {
-        _putchar('%');
-        (*count)++;
+	_putchar('%');
+	(*count)++;
 }
 /**
  * _printf - function that produces output according to a format
@@ -56,43 +56,43 @@ void print_percent(int *count)
  */
 int _printf(const char *format, ...)
 {
-        va_list args;
+	va_list args;
 
-        int count = 0;
+	int count = 0;
 
-        va_start(args, format);
+	va_start(args, format);
 
-        while (*format)
-        {
-                if (*format == '%')
-                {
-                        format++;
-                        switch (*format)
-                        {
-                                case 'c':
-                                        print_char(args, &count);
-                                        break;
-                                case 's':
-                                        printf_string(args, &count);
-                                        break;
-                                case '%':
-                                        print_percent(&count);
-                                        break;
-                                default:
-                                        _putchar('%');
-                                        _putchar(*format);
-                                        count += 2;
-                        }
-                }
-                else
-                {
-                        _putchar(*format);
-                        count++;
-                }
-                format++;
-        }
-        va_end(args);
-        return (count);
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			switch (*format)
+			{
+				case 'c':
+					print_char(args, &count);
+					break;
+				case 's':
+					printf_string(args, &count);
+					break;
+				case '%':
+					print_percent(&count);
+					break;
+				default:
+					_putchar('%');
+					_putchar(*format);
+					count += 2;
+			}
+		}
+		else
+		{
+			_putchar(*format);
+			count++;
+		}
+		format++;
+	}
+	va_end(args);
+	return (count);
 }
 /**
  * ce_main - function main
@@ -102,11 +102,11 @@ int _printf(const char *format, ...)
 
 int ce_main(void)
 {
-        char c = 'B';
-        const char *s = "Hello, Team collins and ezekiel!";
+	char c = 'B';
+	const char *s = "Hello, Team collins and ezekiel!";
 
-        int num_chars = _printf("Character: %c, String: %s, Percentage: %%\n", c, s);
+	int num_chars = _printf("Character: %c, String: %s, Percentage: %%\n", c, s);
 
-        printf("\nNumber of characters printed: %d\n", num_chars);
-        return (0);
+	printf("\nNumber of characters printed: %d\n", num_chars);
+	return (0);
 }
